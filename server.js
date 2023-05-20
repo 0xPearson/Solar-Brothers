@@ -25,14 +25,14 @@ const sendMail = async (form) => {
   const transporter = await nodeMail.createTransport({
     service: "gmail",
     auth: {
-      user: "",
-      pass: "",
+      user: "", // Redacted for security
+      pass: "", // Redacted for security
     },
   });
 
   const mailOptions = {
-    from: "",
-    to: "",
+    from: "", // Redacted for security
+    to: "", // Redacted for security
     subject: "<---- NEW SOLAR INQUIRY ---->",
     html: `
       <h1>NEW SOLAR INQUIRY</h1>
