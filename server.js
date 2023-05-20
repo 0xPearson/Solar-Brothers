@@ -11,9 +11,14 @@ app.get("/", (req, res) => {
 });
 
 app.post("/leads", async (req, res) => {
-  let { data } = req.body;
-  await sendMail(data);
-  res.sendStatus(200);
+  try {
+    let { data } = req.body;
+    await sendMail(data);
+    res.sendStatus(200);
+  } catch (e) {
+    console.log(`Error sending mail: ${e.message}`);
+    res.sendStatus(503);
+  }
 });
 
 const sendMail = async (form) => {
@@ -43,13 +48,8 @@ const sendMail = async (form) => {
     `,
   };
 
-  try {
-    await transporter.sendMail(mailOptions);
-    return "Message Sent Successfully!";
-  } catch (error) {
-    console.error(error.message);
-    throw error;
-  }
+  await transporter.sendMail(mailOptions);
+  return "Message Sent Successfully!";
 };
 
 app.listen(process.env.PORT || 3000);
