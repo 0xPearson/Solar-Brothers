@@ -24,18 +24,31 @@ const sendMail = async (form) => {
       pass: "",
     },
   });
-  const mailOption = {
+
+  const mailOptions = {
     from: "",
     to: "",
     subject: "<---- NEW SOLAR INQUIRY ---->",
-    html: `<h1>NEW SOLAR INQUIRY</h1><br>Email: <strong>${form.email}</strong><br>First Name: <strong>${form.firstName}</strong><br>Last Name: <strong>${form.lastName}</strong><br>Phone Number: <strong><a href="tel:${form.phone}">${form.phone}</a></strong><br>City: <strong>${form.city}</strong><br>State: <strong>${form.state}</strong><br>Zip Code: <strong>${form.zip}</strong><br><br><p><strong>This delivery system was developed by @devante.dev</strong></p>`,
+    html: `
+      <h1>NEW SOLAR INQUIRY</h1>
+      <br>Email: <strong>${form.email}</strong>
+      <br>First Name: <strong>${form.firstName}</strong>
+      <br>Last Name: <strong>${form.lastName}</strong>
+      <br>Phone Number: <strong><a href="tel:${form.phone}">${form.phone}</a></strong>
+      <br>City: <strong>${form.city}</strong>
+      <br>State: <strong>${form.state}</strong>
+      <br>Zip Code: <strong>${form.zip}</strong>
+      <br><br>
+      <p><strong>This delivery system was developed by @devante.dev</strong></p>
+    `,
   };
+
   try {
-    await transporter.sendMail(mailOption);
-    return Promise.resolve("Message Sent Successfully!");
+    await transporter.sendMail(mailOptions);
+    return "Message Sent Successfully!";
   } catch (error) {
-    console.log(error.message);
-    return Promise.reject(error);
+    console.error(error.message);
+    throw error;
   }
 };
 
