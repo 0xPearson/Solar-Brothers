@@ -1,4 +1,4 @@
-# SolarBros Website Server
+# Solar Brothers
  Custom built for [solarbrothers.energy](https://solarbrothers.energy)
 
 Includes:
